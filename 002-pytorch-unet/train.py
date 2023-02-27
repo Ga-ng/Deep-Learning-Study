@@ -111,7 +111,7 @@ class UNet(nn.Module):
         ## segmentation 에 필요한 n개의 클래스에 대한 output을 만들기 위해
         ## 녹색화살표와 같이 1x1 conv 레이어 정의
 
-        self.fc = nn.Conv2d(in_channels=64, out_channels=2, kernel_size=1, stride=1, padding=0, bias=True)
+        self.fc = nn.Conv2d(in_channels=64, out_channels=1, kernel_size=1, stride=1, padding=0, bias=True)
 
         # 이까지 하면 UNet에서 필요한 레이어들을 모두 초기화 한 것
 
