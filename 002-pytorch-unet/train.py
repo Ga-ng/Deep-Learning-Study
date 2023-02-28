@@ -1,13 +1,14 @@
 ## 라이브러리 추가하기
 import os
-
-import matplotlib.pyplot as plt
 import numpy as np
 
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
-from torch.utils.tensorboard import SummaryWriter
+# from torch.utils.tensorboard import SummaryWriter
+# from tensorboardX import SummaryWriter
+
+import matplotlib.pyplot as plt
 
 from torchvision import transforms, datasets
 
@@ -354,8 +355,8 @@ fn_denorm = lambda x, mean, std: (x * std) + mean
 fn_class = lambda x: 1.0 * (x > 0.5)
 
 # tensorboard 사용에 필요한 SummaryWrite 선언
-writer_train = SummaryWriter(log_dir=os.path.join(log_dir, 'train'))
-writer_val = SummaryWriter(log_dir=os.path.join(log_dir, 'val'))
+# writer_train = SummaryWriter(log_dir=os.path.join(log_dir, 'train'))
+# writer_val = SummaryWriter(log_dir=os.path.join(log_dir, 'val'))
 
 ## 네트워크를 저장하는 함수
 def save(ckpt_dir, net, optim, epoch):
@@ -416,12 +417,12 @@ for epoch in range(st_epoch + 1, num_epoch + 1):
         input = fn_tonumpy(fn_denorm(input, mean=0.5, std=0.5))
         output = fn_tonumpy(fn_class(output))
 
-        writer_train.add_image('label', label, num_batch_train * (epoch - 1) + batch, dataformats='NHWC')
-        writer_train.add_image('input', input, num_batch_train * (epoch - 1) + batch, dataformats='NHWC')
-        writer_train.add_image('output', output, num_batch_train * (epoch - 1) * batch, dataformats='NHWC')
-
-    ## loss 를 텐서보드에 저장
-    writer_train.add_scalar('loss', np.mean(loss_arr), epoch)
+    #     writer_train.add_image('label', label, num_batch_train * (epoch - 1) + batch, dataformats='NHWC')
+    #     writer_train.add_image('input', input, num_batch_train * (epoch - 1) + batch, dataformats='NHWC')
+    #     writer_train.add_image('output', output, num_batch_train * (epoch - 1) * batch, dataformats='NHWC')
+    #
+    # ## loss 를 텐서보드에 저장
+    # writer_train.add_scalar('loss', np.mean(loss_arr), epoch)
 
     # 이까지가 network 를 train하는 부분
 
@@ -456,12 +457,12 @@ for epoch in range(st_epoch + 1, num_epoch + 1):
             input = fn_tonumpy(fn_denorm(input))
             output = fn_tonumpy(fn_class(output))
 
-            writer_val.add_image('label', label, num_batch_val * (epoch - 1) + batch, dataformats='NHWC')
-            writer_val.add_image('input', input, num_batch_val * (epoch - 1) + batch, dataformats='NHWC')
-            writer_val.add_image('output', output, num_batch_val * (epoch - 1) + batch, dataformats='NHWC')
+            # writer_val.add_image('label', label, num_batch_val * (epoch - 1) + batch, dataformats='NHWC')
+            # writer_val.add_image('input', input, num_batch_val * (epoch - 1) + batch, dataformats='NHWC')
+            # writer_val.add_image('output', output, num_batch_val * (epoch - 1) + batch, dataformats='NHWC')
 
         # loss fun 저장하는 부분 작성
-        writer_val.add_scalar('loss', np.mean(loss_arr), epoch)
+        # writer_val.add_scalar('loss', np.mean(loss_arr), epoch)
 
         # 10번, 50 번 마다 저장하고 싶으면
         # if epoch // 5 == 0: # 해 주면 됨
@@ -472,5 +473,5 @@ for epoch in range(st_epoch + 1, num_epoch + 1):
 
 
     ## 학습이 완료되면 두개의 wrtier를 close 해주기
-    writer_train.close()
-    writer_val.close()
+    # writer_train.close()
+    # writer_val.close()
