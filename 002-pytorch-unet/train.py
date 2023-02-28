@@ -1,13 +1,13 @@
 ## 라이브러리 추가하기
 import os
+
+import matplotlib.pyplot as plt
 import numpy as np
 
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
-
-# import matplotlib.pyplot as plt
 
 from torchvision import transforms, datasets
 
