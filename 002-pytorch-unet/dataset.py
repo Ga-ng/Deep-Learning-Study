@@ -84,7 +84,7 @@ class ToTensor(object):
 
         # numpty 는 (y, x, ch), pytorch 는 (ch, y, x) 로 순서가 다름
         label = label.transpose((2, 0, 1)).astype(np.float32)
-        input = label.transpose((2, 0, 1)).astype(np.float32)
+        input = input.transpose((2, 0, 1)).astype(np.float32)
 
         # from_numpy를 적용하기
         data = {'label': torch.from_numpy(label), 'input': torch.from_numpy(input)}

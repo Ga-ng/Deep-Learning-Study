@@ -155,7 +155,7 @@ if mode == 'train':
             # loss function 계산
             loss_arr += [loss.item()]
 
-            print("TRAIN: EPOCH %04d / %04d | BATCH %04d / $04d | LOSS %.4f" %
+            print("TRAIN: EPOCH %04d / %04d | BATCH %04d / %04d | LOSS %.4f" %
                   (epoch, num_epoch, batch, num_batch_train, np.mean(loss_arr)))
 
             # tensorborad 에 input, output, label을 저장
@@ -165,7 +165,7 @@ if mode == 'train':
 
         #     writer_train.add_image('label', label, num_batch_train * (epoch - 1) + batch, dataformats='NHWC')
         #     writer_train.add_image('input', input, num_batch_train * (epoch - 1) + batch, dataformats='NHWC')
-        #     writer_train.add_image('output', output, num_batch_train * (epoch - 1) * batch, dataformats='NHWC')
+        #     writer_train.add_image('output', output, num_batch_train * (epoch - 1) + batch, dataformats='NHWC')
         #
         # ## loss 를 텐서보드에 저장
         # writer_train.add_scalar('loss', np.mean(loss_arr), epoch)
@@ -200,7 +200,7 @@ if mode == 'train':
 
                 # tensorboard에 label, input, output을 저장하는 부분을 작성
                 label = fn_tonumpy(label)
-                input = fn_tonumpy(fn_denorm(input))
+                input = fn_tonumpy(fn_denorm(input, mean=0.5, std=0.5))
                 output = fn_tonumpy(fn_class(output))
 
                 # writer_val.add_image('label', label, num_batch_val * (epoch - 1) + batch, dataformats='NHWC')
@@ -242,7 +242,7 @@ else:
             # vailation 은 backpropagation 안하니까 backward path 는 구현하지 않음
 
             # loss function 계산하기
-            loss = fn_loss(input, label)
+            loss = fn_loss(output, label)
 
             loss_arr += [loss.item()]
 
@@ -251,7 +251,7 @@ else:
 
             # tensorboard에 label, input, output을 저장하는 부분을 작성
             label = fn_tonumpy(label)
-            input = fn_tonumpy(fn_denorm(input))
+            input = fn_tonumpy(fn_denorm(input, mean=0.5, std=0.5))
             output = fn_tonumpy(fn_class(output))
 
             for j in range(label.shape[0]):
