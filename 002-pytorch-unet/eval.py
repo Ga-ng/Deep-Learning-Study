@@ -350,8 +350,8 @@ st_epoch = 0
 net, optim, st_epoch = load(ckpt_dir=ckpt_dir, net=net, optim=optim)
 
 
-    ## 아래는 network를 vaildation 하는 부분
-    # vaildation 에는 backpropagation 하는 부분이 없기 때문에 torch.no_grad()해서 사전에 막기
+## 아래는 network를 vaildation 하는 부분
+# vaildation 에는 backpropagation 하는 부분이 없기 때문에 torch.no_grad()해서 사전에 막기
 
 with torch.no_grad():
     # network에게 현재 vaildation 모드임을 명시
