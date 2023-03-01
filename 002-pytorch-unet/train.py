@@ -64,6 +64,16 @@ if not os.path.exists(result_dir):
 # train이 GPU, CPU 어디서 동작할지? 결정하는 device flag
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
+print(f"learning rate: {lr:.4e}")
+print(f"batch size: {batch_size}")
+print(f"number of epoch: {num_epoch}")
+print(f"data dir: {data_dir}")
+print(f"ckpt dir: {ckpt_dir}")
+print(f"log dir: {log_dir}")
+print(f"result dir: {result_dir}")
+print(f"mode: {mode}")
+print(f"train continue: {train_continue}")
+
 
 ## 이번에는 실제로 트레이닝을 진행하고 vaildation 을 할 수 있는 Frame work을 구현해 보자.
 
