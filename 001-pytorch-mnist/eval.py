@@ -5,7 +5,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
-from torch.utils.tensorboard import SummaryWriter
+# from torch.utils.tensorboard import SummaryWriter
 
 from torchvision import transforms, datasets
 
@@ -97,7 +97,7 @@ fn_acc = lambda pred, label: ((pred.max(dim=1)[1] == label).type(torch.float)).m
 
 optim = torch.optim.Adam(params, lr=lr)
 
-writer = SummaryWriter(log_dir=log_dir)
+# writer = SummaryWriter(log_dir=log_dir)
 
 net, optim = load(ckpt_dir=ckpt_dir, net=net, optim=optim)
 

@@ -5,7 +5,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
-from torch.utils.tensorboard import SummaryWriter
+# from torch.utils.tensorboard import SummaryWriter
 
 from torchvision import transforms, datasets
 
@@ -97,8 +97,7 @@ fn_pred = lambda output: torch.softmax(output, dim=1)
 fn_acc = lambda pred, label: ((pred.max(dim=1)[1] == label).type(torch.float)).mean()
 
 optim = torch.optim.Adam(params, lr=lr)
-
-writer = SummaryWriter(log_dir=log_dir)
+# writer = SummaryWriter(log_dir=log_dir)
 
 ## 트레이닝 시작하기
 for epoch in range(1, num_epoch + 1):
@@ -129,9 +128,9 @@ for epoch in range(1, num_epoch + 1):
         print('TRAIN: EPOCH %04d/%04d | BATCH %04d/%04d | LOSS: %.4f | ACC %.4f' %
               (epoch, num_epoch, batch, num_batch, np.mean(loss_arr), np.mean(acc_arr)))
 
-    writer.add_scalar('loss', np.mean(loss_arr), epoch)
-    writer.add_scalar('acc', np.mean(acc_arr), epoch)
+    # writer.add_scalar('loss', np.mean(loss_arr), epoch)
+    # writer.add_scalar('acc', np.mean(acc_arr), epoch)
 
     save(ckpt_dir = ckpt_dir, net=net, optim=optim, epoch=epoch)
 
-writer.close()
+# writer.close()
